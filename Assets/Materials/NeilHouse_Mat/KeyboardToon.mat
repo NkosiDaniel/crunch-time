@@ -326,7 +326,7 @@ Material:
     - _HeightPoMAmplitude: 2
     - _HeightTessAmplitude: 2
     - _HeightTessCenter: 0.5
-    - _HighColor_Power: 0.25
+    - _HighColor_Power: 0.1
     - _HighlightOverridden: 0
     - _HighlightVisible: 1
     - _InvTilingScale: 1
@@ -487,7 +487,7 @@ Material:
     - _utsVersionY: 10
     - _utsVersionZ: 1
     m_Colors:
-    - _1st_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
+    - _1st_ShadeColor: {r: 0, g: 0, b: 0, a: 1}
     - _2nd_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
     - _AmbientColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     - _AngelRingMaskColor: {r: 0, g: 1, b: 0, a: 1}
