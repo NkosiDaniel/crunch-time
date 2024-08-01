@@ -9,6 +9,7 @@ public class TestingArchitect : MonoBehaviour
 {
     DialogHandler ds;
     TextArchitect architect;
+    int counter;
     string[] text = new string[5] 
     {
         "Ok so we have like 35 days left to complete this game jam",
@@ -21,15 +22,31 @@ public class TestingArchitect : MonoBehaviour
     {
         ds = DialogHandler.instance;
         architect = new TextArchitect(ds.dialogContainer.dialogText);
-        architect.buildMethod = TextArchitect.BuildMethod.instant;
+        architect.buildMethod = TextArchitect.BuildMethod.typewriter;
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space)) 
         {
-            architect.Build(text[Random.Range(0, text.Length)]);
+            if(architect.isBuilding) 
+            {
+                if(!architect.haste)
+                    architect.haste = true;
+                else
+                    architect.ForceComplete();
+
+            }
+            else 
+            {
+                architect.Build(text[counter]);
+                counter++;
+            }
         }
-    }
+        else if(Input.GetKeyDown(KeyCode.A))
+        {
+            architect.Append(text[counter]);
+        }
+    }   
   }
 }

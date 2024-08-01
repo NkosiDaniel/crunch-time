@@ -1,0 +1,5 @@
+Honestly don't even know what to say here, I'm just testing stuff and hoping it'll work
+
+Programming is so tedious sometimes ngl, rn i'm just following this tutorial for making a visual novel and this guy is smart as hell
+
+I don't know how to use the StreamReader in unity and I hate manipulating strings, so I think this series will be good to work on that weakness 

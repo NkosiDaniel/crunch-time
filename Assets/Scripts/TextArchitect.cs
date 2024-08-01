@@ -28,7 +28,7 @@ public class TextArchitect
 
     public float speed {get {return baseSpeed * speedMultiplier;} set {speedMultiplier = value; }}
     private const float baseSpeed = 1; //Universal speed 
-    private float speedMultiplier; //Inidvidual speed
+    private float speedMultiplier = 1; //Inidvidual speed
     public int characterPerCycle { get {return speed <= 2f ? characterMultipler : speed <= 2.5f ? characterMultipler * 2 : characterMultipler * 3;}}
     private int characterMultipler = 1;
     public bool haste = false;
@@ -110,6 +110,21 @@ public class TextArchitect
     private void OnComplete() 
     {
         buildProcess = null;
+        haste = false;
+    }
+
+    public void ForceComplete() 
+    {
+        switch(buildMethod) 
+        {
+            case BuildMethod.typewriter:
+                tmpro.maxVisibleCharacters = tmpro.textInfo.characterCount;
+                break;
+            case BuildMethod.fade:
+                break;
+        }
+        Stop();
+        OnComplete();
     }
 
     private void Prepare() 
@@ -135,12 +150,32 @@ public class TextArchitect
         tmpro.ForceMeshUpdate(); //Any changes we make is going to be applied at this point
         tmpro.maxVisibleCharacters = tmpro.textInfo.characterCount; //Make sure every character is visible on screen
     }
-     private void Prepare_Typewriter() {}
+     private void Prepare_Typewriter() 
+     {
+        //Resetting itself to be in a good starting order
+        tmpro.color = tmpro.color;
+        tmpro.maxVisibleCharacters = 0;
+        tmpro.text = preText;
+        //If there is pretex, then the text will be forced to update and be verified if it's visible
+        if(preText != "") 
+        {
+            tmpro.ForceMeshUpdate();
+            tmpro.maxVisibleCharacters = tmpro.textInfo.characterCount;
+        }
+
+        tmpro.text += targetText;
+        tmpro.ForceMeshUpdate();
+
+     }
       private void Prepare_Fade() {}
 
     private IEnumerator Build_Typewriter() 
     {
-        yield return null;
+       while(tmpro.maxVisibleCharacters < tmpro.textInfo.characterCount) 
+       {
+            tmpro.maxVisibleCharacters += haste ? characterPerCycle * 5 : characterPerCycle;
+            yield return new WaitForSeconds(0.015f / speed);
+       }
     }
 
      private IEnumerator Build_Fade() 
