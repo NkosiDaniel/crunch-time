@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
-public class DialogHandler : MonoBehaviour
+namespace DIALOGUE
 {
-    public DialogContainer dialogContainer = new DialogContainer();
-
-
-    public static DialogHandler instance;
-
-    public void Awake() 
+    public class DialogHandler : MonoBehaviour
     {
-        if(instance == null)
-            instance = this;
-        else
-            DestroyImmediate(gameObject);
-    }
+        public DialogContainer dialogContainer = new DialogContainer();
 
+
+        public static DialogHandler instance;
+
+        public void Awake()
+        {
+            if (instance == null)
+                instance = this;
+            else
+                DestroyImmediate(gameObject);
+        }
+    }
 }
